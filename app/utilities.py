@@ -11,7 +11,11 @@ def generate_presigned_url(item):
 
     CLIENT_METHOD = "get_object"
     EXPIRES_IN = 1000
+<<<<<<< HEAD
     REGION_NAME = os.environ.get("REGION_NAME")
+=======
+    REGION_NAME = os.environ.get("AWS_DEFAULT_REGION", "us-west-2")
+>>>>>>> f2bc22a (Changed us-east-1 to us-west-2)
     BUCKET_NAME = os.environ.get("BUCKET_NAME")
 
     if not BUCKET_NAME:

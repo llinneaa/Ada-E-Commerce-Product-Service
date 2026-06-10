@@ -14,7 +14,10 @@ def process_message(message):
     if event["event_type"] == "order.placed":
         order = event["payload"]
 
+<<<<<<< HEAD
         # process each item within THIS order
+=======
+>>>>>>> f2bc22a (Changed us-east-1 to us-west-2)
         for item in order["items"]:
             decrement_stock(item["product_id"], item["quantity"])
 

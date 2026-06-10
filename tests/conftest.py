@@ -11,7 +11,7 @@ def aws_credentials():
     os.environ["TABLE_NAME"] = "test-table"
     os.environ["KEY_NAME"] = "product_key"
     os.environ["BUCKET_NAME"] = "test-bucket"
-    os.environ["AWS_DEFAULT_REGION"] = "us-east-1"
+    os.environ["AWS_DEFAULT_REGION"] = "us-west-2"
     os.environ["AWS_ACCESS_KEY_ID"] = "testing"
     os.environ["AWS_SECRET_ACCESS_KEY"] = "testing"
     os.environ["S3_DEFAULT_KEY"] = "S3_DEFAULT_KEY"
@@ -42,7 +42,12 @@ def dynamodb_table(mock_aws_context):
     table.wait_until_exists()
 
     s3 = boto3.client("s3", region_name=os.environ["AWS_DEFAULT_REGION"])
-    s3.create_bucket(Bucket=os.environ["BUCKET_NAME"])
+    s3.create_bucket(
+        Bucket=os.environ["BUCKET_NAME"],
+        CreateBucketConfiguration={
+            "LocationConstraint": os.environ["AWS_DEFAULT_REGION"],
+        },
+    )
 
     yield table
 
